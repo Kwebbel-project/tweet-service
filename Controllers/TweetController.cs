@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using tweet_service.Models;
+using tweet_service.Services;
 
 namespace tweet_service.Controllers
 {
@@ -8,10 +9,23 @@ namespace tweet_service.Controllers
     [ApiController]
     public class TweetController : ControllerBase
     {
-        [HttpPost]
-        public ActionResult<Tweet> PostTweet(Tweet tweet)
+        private readonly TweetService _tweetService;
+
+        public TweetController(TweetService tweetService)
         {
-            return null;
+            _tweetService = tweetService;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<List<Tweet>>> GetTweets(Tweet tweet)
+        {
+            return await _tweetService.GetAllTweets();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<Tweet>> PostTweet(Tweet tweet)
+        {
+            return await _tweetService.CreateTweets(tweet);
         }
     }
 }

@@ -1,30 +1,25 @@
-﻿using tweet_service.Data;
+﻿using Microsoft.Extensions.Options;
+using MongoDB.Driver;
+using tweet_service.Data;
 using tweet_service.Models;
-using tweet_service.Repositories.Interfaces;
 
 namespace tweet_service.Repositories
 {
-    public class TweetRepository : ITweetRepository
+    public class TweetRepository
     {
-        private readonly ApiDbContext _context;
+        private readonly IMongoCollection<Tweet> _tweetsCollection;
 
-        public TweetRepository(ApiDbContext context)
+        public TweetRepository(IOptions<MongoDBSettings> mongoDBSettings)
         {
-            _context = context;
+            var mongoClient = new MongoClient(mongoDBSettings.Value.ConnectionURI);
+            var mongoDatabase = mongoClient.GetDatabase(mongoDBSettings.Value.DatabaseName);
+            _tweetsCollection = mongoDatabase.GetCollection<Tweet>(mongoDBSettings.Value.CollectionName);
         }
 
-        public void CreateTweet(Tweet tweet)
-        {
-            if (tweet == null)
-            {
-                throw new ArgumentNullException(nameof(tweet));
-            }
-            _context.Tweets.Add(tweet);
-        }
+        public async Task<List<Tweet>> GetAsync() =>
+        await _tweetsCollection.Find(_ => true).ToListAsync();
 
-        public bool SaveChanges()
-        {
-            return (_context.SaveChanges() >= 0);
-        }
+        public async Task CreateAsync(Tweet newTweet) =>
+        await _tweetsCollection.InsertOneAsync(newTweet);
     }
 }
