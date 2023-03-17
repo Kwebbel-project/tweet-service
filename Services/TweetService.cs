@@ -1,9 +1,10 @@
 ﻿using tweet_service.Models;
 using tweet_service.Repositories;
+using tweet_service.Services.interfaces;
 
 namespace tweet_service.Services
 {
-    public class TweetService
+    public class TweetService : ITweetService
     {
         private readonly TweetRepository _repository;
 
@@ -17,7 +18,7 @@ namespace tweet_service.Services
             return await _repository.GetAsync();
         }
 
-        public async Task<Tweet> CreateTweets(Tweet newTweet)
+        public async Task<Tweet> CreateTweet(Tweet newTweet)
         {
             await _repository.CreateAsync(newTweet);
             return newTweet;

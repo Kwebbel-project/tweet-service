@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using tweet_service.Models;
+using tweet_service.Models.Dto;
 using tweet_service.Services;
 
 namespace tweet_service.Controllers
@@ -10,22 +12,24 @@ namespace tweet_service.Controllers
     public class TweetController : ControllerBase
     {
         private readonly TweetService _tweetService;
+        private readonly IMapper _mapper;
 
-        public TweetController(TweetService tweetService)
+        public TweetController(TweetService tweetService, IMapper mapper)
         {
             _tweetService = tweetService;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Tweet>>> GetTweets(Tweet tweet)
+        public async Task<ActionResult<List<Tweet>>> GetTweets()
         {
             return await _tweetService.GetAllTweets();
         }
 
         [HttpPost]
-        public async Task<ActionResult<Tweet>> PostTweet(Tweet tweet)
+        public async Task<ActionResult<Tweet>> PostTweet(TweetCreateDto tweetCreateDto)
         {
-            return await _tweetService.CreateTweets(tweet);
+            return await _tweetService.CreateTweet(_mapper.Map<Tweet>(tweetCreateDto));
         }
     }
 }
