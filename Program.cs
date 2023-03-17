@@ -2,21 +2,24 @@ using Microsoft.EntityFrameworkCore;
 using tweet_service.Data;
 using tweet_service.Repositories;
 using tweet_service.Repositories.Interfaces;
+using tweet_service.Services;
+using tweet_service.Services.interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var conn = builder.Configuration.GetConnectionString("DefaultConnection");
-
-builder.Services.AddDbContext<ApiDbContext>(options => options.UseNpgsql(conn));
-builder.Services.AddScoped<ITweetRepository, TweetRepository>();
+builder.Services.Configure<MongoDBSettings>(builder.Configuration.GetSection("MongoDB"));
+builder.Services.AddSingleton<ITweetRepository, TweetRepository>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null) ;
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<ITweetService, TweetService>();
 
 var app = builder.Build();
 
