@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using tweet_service.Common.Kafka;
 using tweet_service.Data;
 using tweet_service.Repositories;
 using tweet_service.Repositories.Interfaces;
@@ -19,7 +20,9 @@ builder.Services.AddControllers()
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 builder.Services.AddScoped<ITweetService, TweetService>();
+builder.Services.AddSingleton<KafkaProducerHandler, KafkaProducerHandler>();
 
 var app = builder.Build();
 

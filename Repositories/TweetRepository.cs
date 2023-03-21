@@ -23,13 +23,13 @@ namespace tweet_service.Repositories
         public async Task CreateTweet(Tweet newTweet) =>
         await _tweetsCollection.InsertOneAsync(newTweet);
 
-        public async Task<Tweet> GetTweetById(int id) =>
+        public async Task<Tweet> GetTweetById(string id) =>
         await _tweetsCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
 
-        public async Task UpdateTweet(int id, Tweet updatedTweet) =>
+        public async Task UpdateTweet(string id, Tweet updatedTweet) =>
         await _tweetsCollection.ReplaceOneAsync(x => x.Id == id, updatedTweet);
 
-        public async Task DeleteTweet(int id) =>
+        public async Task DeleteTweet(string id) =>
         await _tweetsCollection.DeleteOneAsync(x => x.Id == id);
     }
 }
