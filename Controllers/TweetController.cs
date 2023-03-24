@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using tweet_service.Models;
 using tweet_service.Models.Dto;
-using tweet_service.Services;
+using tweet_service.Services.interfaces;
 
 namespace tweet_service.Controllers
 {
@@ -11,10 +11,10 @@ namespace tweet_service.Controllers
     [ApiController]
     public class TweetController : ControllerBase
     {
-        private readonly TweetService _tweetService;
+        private readonly ITweetService _tweetService;
         private readonly IMapper _mapper;
 
-        public TweetController(TweetService tweetService, IMapper mapper)
+        public TweetController(ITweetService tweetService, IMapper mapper)
         {
             _tweetService = tweetService;
             _mapper = mapper;

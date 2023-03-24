@@ -23,6 +23,7 @@ namespace tweet_service.Common.Kafka
             {
                 switch (topic)
                 {
+                    //TODO: create string from enum
                     case Topics.TWEET_CREATED:
                         await _producer.ProduceAsync("TWEET_CREATED", new Message<Null, string> { Value = message });
                         break;

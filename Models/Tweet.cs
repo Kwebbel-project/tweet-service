@@ -8,10 +8,9 @@ namespace tweet_service.Models
     public class Tweet
     {
         [BsonId]
-        [BsonRepresentation(BsonType.Int64)]
         [JsonPropertyName("id")]
-        [Required]
-        public long Id { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string? Id { get; set; }
         [BsonElement("content")]
         [JsonPropertyName("content")]
         [Required]
