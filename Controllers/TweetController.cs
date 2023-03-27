@@ -13,18 +13,29 @@ namespace tweet_service.Controllers
     {
         private readonly ITweetService _tweetService;
         private readonly IMapper _mapper;
+        private readonly ILogger<TweetController> _logger;
+        private readonly IConfiguration _config;
 
-        public TweetController(ITweetService tweetService, IMapper mapper)
+        public TweetController(ITweetService tweetService, IMapper mapper, ILogger<TweetController> logger, IConfiguration config)
         {
             _tweetService = tweetService;
             _mapper = mapper;
+            _logger = logger;
+            _config = config;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Tweet>>> GetTweets()
+        public IActionResult Get()
         {
-            return await _tweetService.GetAllTweets();
+            _logger.LogInformation(_config["MongoDB:ConnectionURI"]);
+            return Ok();
         }
+
+        //[HttpGet]
+        //public async Task<ActionResult<List<Tweet>>> GetTweets()
+        //{
+        //    return await _tweetService.GetAllTweets();
+        //}
 
         [HttpPost]
         public async Task<ActionResult<Tweet>> PostTweet(TweetCreateDto tweetCreateDto)

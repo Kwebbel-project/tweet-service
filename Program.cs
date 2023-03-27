@@ -1,3 +1,4 @@
+using Confluent.Kafka;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using tweet_service.Common.Kafka;
@@ -11,7 +12,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration.AddEnvironmentVariables();
 
-Trace.WriteLine(builder.Configuration.GetSection("MongoDB"));
 
 // Add services to the container.
 builder.Services.Configure<MongoDBSettings>(builder.Configuration.GetSection("MongoDB"));
