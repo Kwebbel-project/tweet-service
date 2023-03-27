@@ -27,6 +27,8 @@ namespace tweet_service.Controllers
         [HttpGet]
         public IActionResult Get()
         {
+            var mongoUrl = Environment.GetEnvironmentVariable("MONGO_URL");
+            _logger.LogInformation("mongourl: " + mongoUrl);
             _logger.LogInformation(_config["MongoDB:ConnectionURI"]);
             return Ok();
         }
