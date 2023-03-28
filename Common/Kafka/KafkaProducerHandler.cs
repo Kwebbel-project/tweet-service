@@ -14,6 +14,7 @@ namespace tweet_service.Common.Kafka
             {
                 BootstrapServers = configuration["Kafka:BootstrapServers"]
             };
+            _logger.LogInformation("kafkaconfig: " + configuration["Kafka:BootstrapServers"]);
             _producer = new ProducerBuilder<Null, string>(config).Build();
         }
 
