@@ -24,20 +24,12 @@ namespace tweet_service.Controllers
             _config = config;
         }
 
-        [HttpGet]
-        public IActionResult Get()
-        {
-            var mongoUrl = Environment.GetEnvironmentVariable("MONGO_URL");
-            _logger.LogInformation("mongourl: " + mongoUrl);
-            _logger.LogInformation(_config["MongoDB:ConnectionURI"]);
-            return Ok();
-        }
 
-        //[HttpGet]
-        //public async Task<ActionResult<List<Tweet>>> GetTweets()
-        //{
-        //    return await _tweetService.GetAllTweets();
-        //}
+        [HttpGet]
+        public async Task<ActionResult<List<Tweet>>> GetTweets()
+        {
+            return await _tweetService.GetAllTweets();
+        }
 
         [HttpPost]
         public async Task<ActionResult<Tweet>> PostTweet(TweetCreateDto tweetCreateDto)
