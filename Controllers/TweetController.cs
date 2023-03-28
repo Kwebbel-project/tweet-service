@@ -28,6 +28,7 @@ namespace tweet_service.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Tweet>>> GetTweets()
         {
+            _logger.LogInformation("kafka:" + _config["Kafka:BootstrapServers"]);
             return await _tweetService.GetAllTweets();
         }
 
