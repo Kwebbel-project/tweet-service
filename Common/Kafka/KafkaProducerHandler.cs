@@ -1,8 +1,9 @@
 ﻿using Confluent.Kafka;
+using tweet_service.Common.Kafka.Interfaces;
 
 namespace tweet_service.Common.Kafka
 {
-    public class KafkaProducerHandler
+    public class KafkaProducerHandler : IKafkaProducerHandler
     {
         private readonly ILogger<KafkaProducerHandler> _logger;
         private IProducer<Null, string> _producer;
@@ -23,15 +24,14 @@ namespace tweet_service.Common.Kafka
             {
                 switch (topic)
                 {
-                    //TODO: create string from enum
                     case Topics.TWEET_CREATED:
-                        await _producer.ProduceAsync("TWEET_CREATED", new Message<Null, string> { Value = message });
+                        await _producer.ProduceAsync(Topics.TWEET_CREATED.ToString(), new Message<Null, string> { Value = message });
                         break;
                     case Topics.TWEET_UPDATED:
-                        await _producer.ProduceAsync("TWEET_UPDATED", new Message<Null, string> { Value = message });
+                        await _producer.ProduceAsync(Topics.TWEET_UPDATED.ToString(), new Message<Null, string> { Value = message });
                         break;
                     case Topics.TWEET_DELETED:
-                        await _producer.ProduceAsync("TWEET_DELETED", new Message<Null, string> { Value = message });
+                        await _producer.ProduceAsync(Topics.TWEET_DELETED.ToString(), new Message<Null, string> { Value = message });
                         break;
                     default:
                         break;

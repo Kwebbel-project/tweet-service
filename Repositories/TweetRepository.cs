@@ -12,7 +12,18 @@ namespace tweet_service.Repositories
 
         public TweetRepository(IOptions<MongoDBSettings> mongoDBSettings)
         {
-            var mongoClient = new MongoClient(mongoDBSettings.Value.ConnectionURI);
+            string connectionUri;
+
+            if (mongoDBSettings.Value.USER != "" && mongoDBSettings.Value.PASSWORD != "")
+            {
+                connectionUri = $"mongodb://{mongoDBSettings.Value.USER}:{mongoDBSettings.Value.PASSWORD}@{mongoDBSettings.Value.HOST}:27017/";
+            }
+            else
+            {
+                connectionUri = "mongodb://localhost:27017/";
+            }
+
+            var mongoClient = new MongoClient(connectionUri);
             var mongoDatabase = mongoClient.GetDatabase(mongoDBSettings.Value.DatabaseName);
             _tweetsCollection = mongoDatabase.GetCollection<Tweet>(mongoDBSettings.Value.CollectionName);
         }

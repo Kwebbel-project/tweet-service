@@ -13,12 +13,17 @@ namespace tweet_service.Controllers
     {
         private readonly ITweetService _tweetService;
         private readonly IMapper _mapper;
+        private readonly ILogger<TweetController> _logger;
+        private readonly IConfiguration _config;
 
-        public TweetController(ITweetService tweetService, IMapper mapper)
+        public TweetController(ITweetService tweetService, IMapper mapper, ILogger<TweetController> logger, IConfiguration config)
         {
             _tweetService = tweetService;
             _mapper = mapper;
+            _logger = logger;
+            _config = config;
         }
+
 
         [HttpGet]
         public async Task<ActionResult<List<Tweet>>> GetTweets()

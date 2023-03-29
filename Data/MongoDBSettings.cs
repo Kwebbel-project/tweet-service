@@ -2,7 +2,9 @@
 {
     public class MongoDBSettings
     {
-        public string ConnectionURI { get; set; } = null!;
+        public string HOST { get; set; } = null!;
+        public string USER { get; set; } = null!;
+        public string PASSWORD { get; set; } = null!;
         public string DatabaseName { get; set; } = null!;
         public string CollectionName { get; set; } = null!;
     }
