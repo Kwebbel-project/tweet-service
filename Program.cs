@@ -2,6 +2,7 @@ using Confluent.Kafka;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using tweet_service.Common.Kafka;
+using tweet_service.Common.Kafka.Interfaces;
 using tweet_service.Data;
 using tweet_service.Repositories;
 using tweet_service.Repositories.Interfaces;
@@ -27,7 +28,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<ITweetService, TweetService>();
-builder.Services.AddSingleton<KafkaProducerHandler, KafkaProducerHandler>();
+builder.Services.AddSingleton<IKafkaProducerHandler, KafkaProducerHandler>();
 
 var app = builder.Build();
 
