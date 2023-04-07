@@ -16,21 +16,19 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '6.0.x'
-      - name: Install dependencies
-        run: dotnet restore \src
-      - name: Build
-        run: dotnet build \src
-      - name: Test with the dotnet CLI
-        run: dotnet test \src
-      - name: Analyze with SonarCloud
-
-        # You can pin the exact commit or the version.
-        # uses: SonarSource/sonarcloud-github-action@de2e56b42aa84d0b1c5b622644ac17e505c9a049
-        uses: SonarSource/sonarcloud-github-action@de2e56b42aa84d0b1c5b622644ac17e505c9a049
-        env:
-          GITHUB_TOKEN: ${{ secrets.G_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          args:
-            -Dsonar.projectKey=Kwebbel-project_tweet-service
-            -Dsonar.organization=kwebbel-project
+          
+      - name: Install Sonar global tool
+        run: dotnet tool install --global dotnet-sonarscanner
+        
+      - name: Begin sonar scan
+        run: dotnet sonarscanner begin /k:"Kwebbel-project_tweet-service" /o:"kwebbel-project" /d:sonar.login=${{ secrets.SONAR_TOKEN }}
+        
+      - name: Build and run unit tests
+        run: |
+          cd src
+          dotnet restore "tweet-service.sln"
+          dotnet build
+          cd ../tweet-service.tests
+          dotnet build
+          dotnet test -p:CollectCoverage=true -p:CoverletOutputFormat=opencover
+          
