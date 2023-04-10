@@ -27,7 +27,6 @@ jobs:
       - name: Build and run unit tests
         run: |
           dotnet test .\tweet-service.tests\
-          dotnet build .\src\tweet-service.csproj
           dotnet test -p:CollectCoverage=true -p:CoverletOutputFormat=opencover
           
       - name: End Sonar scan
