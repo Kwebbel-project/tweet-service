@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "RQ8b/Rp/xiEj6EyZHRehPjNrlvmrUH0FRuyoDRQBCWCbhGpMZUtBL3o4oQ7wmnkwAmg720u5csRIcDH/YTKClw==",
+  "dgSpecHash": "ub/y3GmC4fRDsoYYA2JoPNMc0QbU8y9V/TrP0gUrDmnNHbfD4T0JV9+G7Zqy8BgOT3jWpY8dqPdNsRXTuWZ+BA==",
   "success": true,
   "projectFilePath": "C:\\Github\\Kwebbel\\tweet-service\\tweet-service.tests\\tweet-service.tests.csproj",
   "expectedPackageFiles": [
@@ -14,6 +14,7 @@
     "C:\\Users\\dirkl\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",
     "C:\\Users\\dirkl\\.nuget\\packages\\confluent.kafka\\2.0.2\\confluent.kafka.2.0.2.nupkg.sha512",
     "C:\\Users\\dirkl\\.nuget\\packages\\coverlet.collector\\3.1.2\\coverlet.collector.3.1.2.nupkg.sha512",
+    "C:\\Users\\dirkl\\.nuget\\packages\\coverlet.msbuild\\3.2.0\\coverlet.msbuild.3.2.0.nupkg.sha512",
     "C:\\Users\\dirkl\\.nuget\\packages\\dnsclient\\1.6.1\\dnsclient.1.6.1.nupkg.sha512",
     "C:\\Users\\dirkl\\.nuget\\packages\\kafka-sharp\\1.4.3\\kafka-sharp.1.4.3.nupkg.sha512",
     "C:\\Users\\dirkl\\.nuget\\packages\\librdkafka.redist\\2.0.2\\librdkafka.redist.2.0.2.nupkg.sha512",

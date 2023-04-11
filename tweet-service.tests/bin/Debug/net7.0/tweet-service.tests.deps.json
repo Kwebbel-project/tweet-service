@@ -9,6 +9,7 @@
       "tweet-service.tests/1.0.0": {
         "dependencies": {
           "Microsoft.NET.Test.Sdk": "17.5.0",
+          "coverlet.collector": "3.1.2",
           "coverlet.msbuild": "3.2.0",
           "tweet-service": "1.0.0",
           "xunit": "2.4.2",
@@ -125,6 +126,7 @@
           }
         }
       },
+      "coverlet.collector/3.1.2": {},
       "coverlet.msbuild/3.2.0": {},
       "DnsClient/1.6.1": {
         "dependencies": {
@@ -2312,6 +2314,13 @@
       "sha512": "sha512-q/AdIIa7eV9GnyA5ADRH3g1JG1VknwIhFAg4tOuXRtmNwMCLY+5D+CEZpPs0A0FSsNNyYn248EwE+wO303a/jQ==",
       "path": "confluent.kafka/2.0.2",
       "hashPath": "confluent.kafka.2.0.2.nupkg.sha512"
+    },
+    "coverlet.collector/3.1.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-wuLDIDKD5XMt0A7lE31JPenT7QQwZPFkP5rRpdJeblyXZ9MGLI8rYjvm5fvAKln+2/X+4IxxQDxBtwdrqKNLZw==",
+      "path": "coverlet.collector/3.1.2",
+      "hashPath": "coverlet.collector.3.1.2.nupkg.sha512"
     },
     "coverlet.msbuild/3.2.0": {
       "type": "package",

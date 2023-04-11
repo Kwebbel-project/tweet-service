@@ -1,0 +1,7 @@
+organization=kwebbel-project
+projectKey=Kwebbel-project_tweet-service
+serverUrl=https://sonarcloud.io
+serverVersion=8.0.0.39825
+dashboardUrl=https://sonarcloud.io/dashboard?id=Kwebbel-project_tweet-service
+ceTaskId=AYdcMMlBefCAB3PD2nWM
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AYdcMMlBefCAB3PD2nWM

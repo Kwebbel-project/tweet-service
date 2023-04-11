@@ -1,0 +1,13 @@
+﻿C:\Github\Kwebbel\tweet-service\tweet-service.tests\UnitTest1.cs
+C:\Github\Kwebbel\tweet-service\tweet-service.tests\Usings.cs
+C:\Users\dirkl\.nuget\packages\microsoft.net.test.sdk\17.5.0\build\netcoreapp3.1\Microsoft.NET.Test.Sdk.Program.cs
+C:\Users\dirkl\.nuget\packages\microsoft.testplatform.testhost\17.5.0\build\netcoreapp3.1\x64\testhost.exe
+C:\Users\dirkl\.nuget\packages\microsoft.testplatform.testhost\17.5.0\build\netcoreapp3.1\x64\testhost.dll
+C:\Users\dirkl\.nuget\packages\xunit.runner.visualstudio\2.4.5\build\netcoreapp3.1\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+C:\Users\dirkl\.nuget\packages\xunit.runner.visualstudio\2.4.5\build\netcoreapp3.1\xunit.runner.reporters.netcoreapp10.dll
+C:\Users\dirkl\.nuget\packages\xunit.runner.visualstudio\2.4.5\build\netcoreapp3.1\xunit.runner.utility.netcoreapp10.dll
+C:\Github\Kwebbel\tweet-service\tweet-service.tests\coverage.xml
+C:\Github\Kwebbel\tweet-service\tweet-service.tests\TestResults\03f2c7da-dd84-4e2d-b4c9-0378dcd3328c\coverage.cobertura.xml
+C:\Github\Kwebbel\tweet-service\tweet-service.tests\TestResults\2a442fcf-6112-4703-9ff6-b7f2c1223c92\coverage.cobertura.xml
+C:\Github\Kwebbel\tweet-service\tweet-service.tests\TestResults\453c83ef-4743-4e05-b39c-5406e151c9a7\coverage.cobertura.xml
+C:\Github\Kwebbel\tweet-service\tweet-service.tests\TestResults\fe269700-0fd5-4e3d-843b-2a75b5fb1252\coverage.opencover.xml
