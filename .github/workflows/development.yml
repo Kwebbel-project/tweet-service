@@ -29,7 +29,7 @@ jobs:
         run: dotnet build
         
       - name: Build and run unit tests
-        run: dotnet test ../tweet-service.tests -p:CollectCoverage=true -p:CoverletOutputFormat=opencover -o="coverage.xml"
+        run: dotnet test ..\tweet-service.tests -p:CollectCoverage=true -p:CoverletOutputFormat=opencover -o="coverage.xml"
           
       - name: End Sonar scan
         run: dotnet sonarscanner end /d:sonar.login=${{ secrets.SONAR_TOKEN }}
