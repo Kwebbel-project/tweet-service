@@ -27,7 +27,7 @@ jobs:
         
       - name: Build and run unit tests
         run: |
-          cd ..
+          cd .
           dotnet restore
           dotnet build
           dotnet test -p:CollectCoverage=true -p:CoverletOutputFormat=opencover -o="coverage.xml"
