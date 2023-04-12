@@ -21,7 +21,6 @@ jobs:
         run: dotnet tool install --global dotnet-sonarscanner
         
       - name: Begin sonar scan
-        working-directory: ./src
         run: dotnet sonarscanner begin /k:"Kwebbel-project_tweet-service" /o:"kwebbel-project"  /d:sonar.host.url=https://sonarcloud.io /d:sonar.login=${{ secrets.SONAR_TOKEN }} /d:sonar.cs.xunit.reportsPaths="**/tweet-service.tests/coverage.xml" /d:sonar.verbose=true 
           
       - name: Build project
@@ -33,7 +32,6 @@ jobs:
         run: dotnet test -p:CollectCoverage=true -p:CoverletOutputFormat=opencover -o="coverage.xml"
           
       - name: End Sonar scan
-        working-directory: ./src
         run: dotnet sonarscanner end /d:sonar.login=${{ secrets.SONAR_TOKEN }}
         
         
