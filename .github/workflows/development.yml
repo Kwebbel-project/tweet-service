@@ -22,10 +22,12 @@ jobs:
         
       - name: Begin sonar scan
         run: | 
+          cd src
           dotnet sonarscanner begin /k:"Kwebbel-project_tweet-service" /o:"kwebbel-project"  /d:sonar.host.url=https://sonarcloud.io /d:sonar.login=${{ secrets.SONAR_TOKEN }} /d:sonar.verbose=true 
         
       - name: Build and run unit tests
         run: |
+          cd ../
           dotnet restore
           dotnet build
           dotnet test -p:CollectCoverage=true -p:CoverletOutputFormat=opencover -o="coverage.xml"
