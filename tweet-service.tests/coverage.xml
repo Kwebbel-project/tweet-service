@@ -2,9 +2,9 @@
 <CoverageSession>
   <Summary numSequencePoints="138" visitedSequencePoints="20" numBranchPoints="12" visitedBranchPoints="1" sequenceCoverage="14.49" branchCoverage="8.33" maxCyclomaticComplexity="44" minCyclomaticComplexity="44" visitedClasses="3" numClasses="23" visitedMethods="8" numMethods="36" />
   <Modules>
-    <Module hash="A018F3D4-D03E-4514-B96C-24847A811872">
+    <Module hash="86952411-A208-452C-97F8-D45D7772589B">
       <ModulePath>tweet-service.dll</ModulePath>
-      <ModuleTime>2023-04-11T08:27:00</ModuleTime>
+      <ModuleTime>2023-04-12T12:05:57</ModuleTime>
       <ModuleName>tweet-service</ModuleName>
       <Files>
         <File uid="1" fullPath="C:\Github\Kwebbel\tweet-service\src\Program.cs" />
