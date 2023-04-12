@@ -17,22 +17,20 @@ jobs:
         with:
           dotnet-version: '6.0.x'
           
-      - name: Run Unit Tests and create coverage report
-        run: dotnet test -p:CollectCoverage=true -p:CoverletOutputFormat=opencover -o="coverage.xml"
-          
-      - name: Install Sonar global tool
-        run: dotnet tool install --global dotnet-sonarscanner
-        
-      - name: Begin sonar scan
+      - name: Build and Test
         run: |
-          cd src
-          dotnet sonarscanner begin /k:"Kwebbel-project_tweet-service" /o:"kwebbel-project"  /d:sonar.host.url=https://sonarcloud.io /d:sonar.login=${{ secrets.SONAR_TOKEN }} /d:sonar.cs.opencover.reportsPaths="../tweet-service.tests/coverage.xml" /d:sonar.verbose=true 
-          
-      - name: Build project
-        run: dotnet build
-          
-      - name: End Sonar scan
-        run: dotnet sonarscanner end /d:sonar.login=${{ secrets.SONAR_TOKEN }}
+          dotnet build
+          dotnet test --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.coverage.opencover.reportsPaths=**/tweet-service.tests/coverage.xml
+            -Dsonar.cs.opencover.reportsPaths=**/tweet-service.tests/coverage.xml
         
         
           
