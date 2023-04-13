@@ -17,20 +17,22 @@ jobs:
         with:
           dotnet-version: '6.0.x'
           
-      - name: Build and Test
-        run: |
-          dotnet build
-          dotnet test --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
-
+      - name: Install Coverlet tool
+        run: dotnet tool install --global coverlet.console
+        
+      - name: Install Sonar global tool
+        run: dotnet tool install --global dotnet-sonarscanner
+      
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          args: >
-            -Dsonar.coverage.opencover.reportsPaths=**/tweet-service.tests/coverage.xml
-            -Dsonar.cs.opencover.reportsPaths=**/tweet-service.tests/coverage.xml
-        
-        
+          
+      - name: Run Sonarscanner
+        run: |
+          dotnet sonarscanner begin /k:"Kwebbel-project_tweet-service" /d:sonar.login=${{ secrets.SONAR_TOKEN }} /d:sonar.cs.opencover.reportsPaths=coverage.xml
+          dotnet build --no-incremental
+          coverlet .\tweet-service.Tests\bin\Debug\net7.0\tweet-service.Tests.dll -target "dotnet" --targetargs "test --no-build" -f=opencover -o="coverage.xml"
+          dotnet sonarscanner end /d:sonar.login=${{ secrets.SONAR_TOKEN }}
           
