@@ -25,7 +25,7 @@ jobs:
           
       - name: Run Sonarscanner
         run: |
-          dotnet sonarscanner begin /k:"Kwebbel-project_tweet-service" /d:sonar.login=${{ secrets.SONAR_TOKEN }} /d:sonar.cs.opencover.reportsPaths=coverage.xml
+          dotnet sonarscanner begin /k:"Kwebbel-project_tweet-service" /o:"kwebbel-project" /d:sonar.host.url=https://sonarcloud.io /d:sonar.login=${{ secrets.SONAR_TOKEN }} /d:sonar.cs.opencover.reportsPaths=coverage.xml
           dotnet build --no-incremental
           coverlet .\tweet-service.Tests\bin\Debug\net7.0\tweet-service.Tests.dll -target "dotnet" --targetargs "test --no-build" -f=opencover -o="coverage.xml"
           dotnet sonarscanner end /d:sonar.login=${{ secrets.SONAR_TOKEN }}
