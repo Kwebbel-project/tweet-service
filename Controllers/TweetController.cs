@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using tweet_service.Exceptions;
 using tweet_service.Models;
 using tweet_service.Models.Dto;
 using tweet_service.Services.interfaces;
@@ -34,7 +35,18 @@ namespace tweet_service.Controllers
         [HttpPost]
         public async Task<ActionResult<Tweet>> PostTweet(TweetCreateDto tweetCreateDto)
         {
-            return await _tweetService.CreateTweet(_mapper.Map<Tweet>(tweetCreateDto));
+            try
+            {
+                return await _tweetService.CreateTweet(_mapper.Map<Tweet>(tweetCreateDto));
+            }
+            catch (NullTweetException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (TweetServiceException ex) 
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
     }
 }

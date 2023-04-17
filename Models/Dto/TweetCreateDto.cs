@@ -14,8 +14,6 @@ namespace tweet_service.Models.Dto
         [Required]
         public string Author { get; set; }
         [Required]
-        public DateTime CreatedAt { get; set; }
-        [Required]
         public long userId { get; set; }
     }
 }
