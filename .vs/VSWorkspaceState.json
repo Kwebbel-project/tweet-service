@@ -3,6 +3,6 @@
     "",
     "\\tweet-service.tests"
   ],
-  "SelectedNode": "\\tweet-service.sln",
+  "SelectedNode": "\\tweet-service.tests\\coverage.xml",
   "PreviewInSolutionExplorer": false
 }
