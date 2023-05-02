@@ -52,7 +52,7 @@ jobs:
         uses: github/codeql-action/analyze@v2
         with:
           category: "/language:${{matrix.language}}"
-          query: codeql/javascript-security-extended.qls
+          query: codeql/csharp-security-extended.qls
           output-format: sarif-latest
           sarif-file: results.sarif
           
