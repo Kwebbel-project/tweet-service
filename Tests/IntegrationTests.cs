@@ -44,7 +44,7 @@ namespace tweet_service.Tests
             request.Content = new StringContent(JsonConvert.SerializeObject(newTweet), Encoding.UTF8, "application/json");
 
             // Act
-            var response = await _httpClient.SendAsync(request);
+            var response = await _client.SendAsync(request);
             var createdTweet = await response.Content.ReadFromJsonAsync<Tweet>();
 
             // Assert
