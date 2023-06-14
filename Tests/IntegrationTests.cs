@@ -2,12 +2,16 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.VisualStudio.TestPlatform.Utilities;
 using Moq;
 using Newtonsoft.Json;
 using System.Net;
 using System.Text;
+using tweet_service.Common.Kafka;
 using tweet_service.Common.Kafka.Interfaces;
+using tweet_service.Data;
 using tweet_service.Models;
 using tweet_service.Models.Dto;
 using tweet_service.Repositories.Interfaces;
@@ -22,18 +26,22 @@ namespace tweet_service.Tests
         private readonly WebApplicationFactory<Program> _factory;
         private HttpClient _client;
 
-
+        private readonly Mock<IKafkaProducerHandler> _mockKafkaProducer;
+        private readonly Mock<ITweetRepository> _mockRepository;
         public IntegrationTests(WebApplicationFactory<Program> factory)
         {
-            _factory = factory;
-            _factory = _factory.WithWebHostBuilder(builder =>
+            _mockRepository = new Mock<ITweetRepository>();
+            _mockKafkaProducer = new Mock<IKafkaProducerHandler>();
+            _factory = factory.WithWebHostBuilder(builder =>
             {
                 builder.ConfigureTestServices(services =>
                 {
-                    services.AddSingleton<IKafkaProducerHandler, MockKafkaClient>();
+                    services.AddSingleton<ITweetRepository>(_ => _mockRepository.Object);
+                    services.AddSingleton<IKafkaProducerHandler>(_ => _mockKafkaProducer.Object);
                 });
+
             });
-            _client = factory.CreateDefaultClient();
+            _client = _factory.CreateClient();
         }
 
         [Fact]
@@ -47,7 +55,7 @@ namespace tweet_service.Tests
 
             // Assert
             response.EnsureSuccessStatusCode();
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
         }
 
         [Fact]
