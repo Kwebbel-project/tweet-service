@@ -20,7 +20,7 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
         
-      - name: Run Unit tests and create coverage report
+      - name: Run unit & integration tests and create coverage report
         run: dotnet test tweet-service.csproj /p:CollectCoverage=true /p:IncludeTestAssembly=true /p:CoverletOutputFormat=opencover /p:ExcludeByFile=\"**/Microsoft.NET.Test.Sdk.Program.cs\"
           
       - name: Upload coverage reports to Codecov
