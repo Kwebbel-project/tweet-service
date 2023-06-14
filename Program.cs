@@ -12,7 +12,13 @@ using tweet_service.Repositories.Interfaces;
 using tweet_service.Services;
 using tweet_service.Services.interfaces;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(new WebApplicationOptions
+{
+    Args = args,
+    ApplicationName = typeof(Program).Assembly.FullName,
+    ContentRootPath = Directory.GetCurrentDirectory(),
+});
+
 
 // Add services to the container.
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true).AddEnvironmentVariables();

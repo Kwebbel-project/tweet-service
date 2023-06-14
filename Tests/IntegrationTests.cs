@@ -1,12 +1,18 @@
 ﻿using Azure.Core;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.AspNetCore.TestHost;
 using Microsoft.VisualStudio.TestPlatform.Utilities;
+using Moq;
 using Newtonsoft.Json;
 using System.Net;
 using System.Text;
+using tweet_service.Common.Kafka.Interfaces;
 using tweet_service.Models;
 using tweet_service.Models.Dto;
+using tweet_service.Repositories.Interfaces;
+using tweet_service.Services;
+using tweet_service.Tests.Mock;
 using Xunit;
 
 namespace tweet_service.Tests
@@ -16,9 +22,17 @@ namespace tweet_service.Tests
         private readonly WebApplicationFactory<Program> _factory;
         private HttpClient _client;
 
+
         public IntegrationTests(WebApplicationFactory<Program> factory)
         {
             _factory = factory;
+            _factory = _factory.WithWebHostBuilder(builder =>
+            {
+                builder.ConfigureTestServices(services =>
+                {
+                    services.AddSingleton<IKafkaProducerHandler, MockKafkaClient>();
+                });
+            });
             _client = factory.CreateDefaultClient();
         }
 
